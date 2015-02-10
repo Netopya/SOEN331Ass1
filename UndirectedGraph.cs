@@ -19,55 +19,13 @@ namespace SOEN331Assignment1_2
     /// <typeparam name="V">Vertex type</typeparam>
     class UndirectedGraph<E, V>
     {
-        private List<Node<E,V>> set;
-        private HashSet<V> verticesList;
-
-        /// <summary>
-        /// Helper class to represent two verticies connected with an edge
-        /// </summary>
-        /// <typeparam name="E">Edge type</typeparam>
-        /// <typeparam name="V">Vertex type</typeparam>
-        private class Node<E, V>
-        {
-            public HashSet<V> vertices { get; private set; }
-            public E edge { get; set; }
-
-            /// <summary>
-            /// Constructor to create a node
-            /// </summary>
-            /// <param name="v">First vertex</param>
-            /// <param name="w">Second vertex</param>
-            /// <param name="x">Edge</param>
-            public Node(V v, V w, E x)
-            {
-                vertices = new HashSet<V> { v, w };
-                edge = x;
-            }
-
-            public override bool Equals(object obj)
-            {
-                var testObj = obj as Node<E,V>;
-                if (testObj != null)
-                {
-                    //equal if verticies are the same or edge values are duplicated
-                    return vertices.SetEquals(testObj.vertices) || edge.Equals(testObj.edge);
-                }
-                else
-                {
-                    return base.Equals(obj);
-                }
-            }
-
-            public override String ToString()
-            {
-                return "{{" + string.Join(", ", vertices.Select(x => x).ToArray()) + "} " + edge + "}";
-            }
-        }
+        private List<UndirectedEdge<E,V>> edgeList;
+        private HashSet<V> vertexList;
 
         public UndirectedGraph()
         {
-            set = new List<Node<E,V>>();
-            verticesList = new HashSet<V>();
+            edgeList = new List<UndirectedEdge<E, V>>();
+            vertexList = new HashSet<V>();
         }
 
         public static UndirectedGraph<E, V> newgraph() {
@@ -76,122 +34,113 @@ namespace SOEN331Assignment1_2
 
         public HashSet<V> vertices()
         {
-            return new HashSet<V>(verticesList);
+            return new HashSet<V>(vertexList);
         }
 
         public HashSet<E> edges()
         {
-            return new HashSet<E>(set.Select(x => x.edge));
+            return new HashSet<E>(edgeList.Select(x => x.element));
         }
 
         public int countAllVertices()
         {
-            return verticesList.Count;
+            return vertexList.Count;
         }
 
         public int countAllEdges()
         {
             return edges().Count;
         }
-        
-        public E getEdge(V v, V w)
+
+        public UndirectedEdge<E, V> getEdge(V v, V w)
         {
-            Node<E,V> edge = set.FirstOrDefault(x => x.vertices.SetEquals(new HashSet<V> {v,w}));
+            UndirectedEdge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.SetEquals(new HashSet<V> { v, w }));
 
             if (edge == null)
             {
                 Console.WriteLine("Exception. No edge can be found connected by both vertices");
-                return default(E);
+                return default(UndirectedEdge<E, V>);
             }
 
-            return edge.edge;
+            return edge;
         }
 
-        public HashSet<E> incidentEdges(V v)
+        public HashSet<UndirectedEdge<E, V>> incidentEdges(V v)
         {
-            return new HashSet<E>(set.Where(x => x.vertices.Contains(v)).Select(x => x.edge));
+            return new HashSet<UndirectedEdge<E, V>>(edgeList.Where(x => x.vertices.Contains(v)));
         }
 
-        public V opposite(V v, E e)
+        public V opposite(V v,UndirectedEdge<E, V> e)
         {
-            Node<E, V> node = set.FirstOrDefault(x => x.vertices.Contains(v) && x.edge.Equals(e));
-            if (node == null)
+            UndirectedEdge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Contains(v) && x.Equals(e));
+            if (edgeList == null)
             {
                 Console.WriteLine("Exception. Specified edge is not connnected to specified vertex");
                 return default(V);
             }
 
-            return node.vertices.FirstOrDefault(x => !x.Equals(v));
+            return edge.vertices.FirstOrDefault(x => !x.Equals(v));
         }
 
-        public HashSet<V> endVerticies(E e)
+        public HashSet<V> endVerticies(UndirectedEdge<E, V> e)
         {
-            return new HashSet<V>(set.FirstOrDefault(x => x.edge.Equals(e)).vertices);
+            return new HashSet<V>(edgeList.FirstOrDefault(x => x.Equals(e)).vertices);
         }
 
         public bool areAdjacent(V v, V w)
         {
-            return set.Any(x => x.vertices.SetEquals(new List<V>() { v, w }));
+            return edgeList.Any(x => x.vertices.SetEquals(new List<V>() { v, w }));
         }
 
         public UndirectedGraph<E,V> insertVertex(V v)
         {
-            verticesList.Add(v);
+            vertexList.Add(v);
             return this;
         }
 
         public UndirectedGraph<E, V> removeVertex(V v)
         {
-            HashSet<V> orphans = new HashSet<V>(set.Where(x => x.vertices.Contains(v)).SelectMany(x => x.vertices));
-            orphans.Remove(v);
-            set.RemoveAll(x => x.vertices.Contains(v));
-            HashSet<V> vertices = this.vertices();
-            orphans = new HashSet<V>(orphans.Except(vertices));
-
-            foreach (V orphan in orphans)
-            {
-                verticesList.Add(orphan);
-            }
+            edgeList.RemoveAll(x => x.vertices.Contains(v));
+            vertexList.Remove(v);
 
             return this;
         }
 
         public UndirectedGraph<E, V> insertEdge(V v, V w, E x)
         {
-            Node<E, V> newNode = new Node<E, V>(v, w, x);
-            if (!set.Any(a => a.Equals(newNode)))
+            UndirectedEdge<E, V> newNode = new UndirectedEdge<E, V>(v, w, x);
+            if (!edgeList.Any(a => a.Equals(newNode)))
             {
-                set.Add(newNode);
-                verticesList.Add(v);
-                verticesList.Add(w);
+                edgeList.Add(newNode);
+                vertexList.Add(v);
+                vertexList.Add(w);
             }
 
             return this;
         }
 
-        public UndirectedGraph<E, V> removeEdge(E e)
+        public UndirectedGraph<E, V> removeEdge(V v, V w)
         {
-            HashSet<V> orphans = new HashSet<V>(set.Where(x => x.edge.Equals(e)).SelectMany(x => x.vertices));
-            set.RemoveAll(x => x.edge.Equals(e));
-            HashSet<V> vertices = this.vertices();
-            orphans = new HashSet<V>(orphans.Except(vertices));
-
-            foreach (V orphan in orphans)
-            {
-                verticesList.Add(orphan);
-            }
-
+            edgeList.Remove(getEdge(v, w));
             return this;
-        }        
-
-        public E getEdgeElem(E e)
-        {
-            return set.FirstOrDefault(x => x.edge.Equals(e)).edge;
         }
 
-        public UndirectedGraph<E, V> replaceEdgeElem(E e, E x) 
+        public E getEdgeElem(UndirectedEdge<E, V> e)
         {
-            set.First(y => y.edge.Equals(e)).edge = x;
+            return e.element;
+        }
+
+        public UndirectedGraph<E, V> replaceEdgeElem(UndirectedEdge<E, V> e, E x) 
+        {
+            if (!edgeList.Any(y => y.element.Equals(x)))
+            {
+                e.element = x;
+            }
+            else
+            {
+                edgeList.Remove(e);
+            }
+            
             return this;
         }
 
