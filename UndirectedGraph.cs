@@ -58,7 +58,7 @@ namespace SOEN331Assignment1_2
                 }
             }
 
-            public override String toString()
+            public override String ToString()
             {
                 return "{{" + string.Join(", ", vertices.Select(x => x).ToArray()) + "} " + edge + "}";
             }
