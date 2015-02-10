@@ -6,20 +6,16 @@ using System.Threading.Tasks;
 
 namespace SOEN331Assignment1_2
 {
-    class UndirectedEdge<E,V>
+    class Edge<E,V>
     {
-        public HashSet<V> vertices { get; private set; }
+        public V[] vertices { get; private set; }
         public E element { get; set; }
         public readonly bool directed;
-        /// <summary>
-        /// Constructor to create an edge
-        /// </summary>
-        /// <param name="v">First vertex</param>
-        /// <param name="w">Second vertex</param>
-        /// <param name="x">Edge</param>
-        public UndirectedEdge(V v, V w, E x, bool directed)
+
+
+        public Edge(V v, V w, E x, bool directed)
         {
-            vertices = new HashSet<V> { v, w };
+            vertices = new V[] {v,w};
             element = x;
             this.directed = directed;
         }
@@ -30,7 +26,7 @@ namespace SOEN331Assignment1_2
             if (testObj != null)
             {
                 //equal if verticies are the same or edge values are duplicated
-                return vertices.SetEquals(testObj.vertices) || element.Equals(testObj.element);
+                return vertices.Except(testObj.vertices).Any() || element.Equals(testObj.element);
             }
             else
             {
