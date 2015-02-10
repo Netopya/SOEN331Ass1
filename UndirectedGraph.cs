@@ -57,6 +57,11 @@ namespace SOEN331Assignment1_2
                     return base.Equals(obj);
                 }
             }
+
+            public override String toString()
+            {
+                return "{{" + string.Join(", ", vertices.Select(x => x).ToArray()) + "} " + edge + "}";
+            }
         }
 
         public UndirectedGraph()

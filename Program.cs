@@ -80,7 +80,7 @@ namespace SOEN331Assignment1_2
             Console.WriteLine("4. New graph has no edges: " + myGraph.countAllEdges());
             myGraph.insertVertex(lasalle);
             myGraph.insertVertex(lachine);
-            Console.WriteLine("5. Adding two different vertices: " + myGraph.countAllVertices());    //NO
+            Console.WriteLine("5. Adding two different vertices: " + myGraph.countAllVertices());
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertVertex(lasalle);
             myGraph.insertVertex(lasalle);
@@ -96,7 +96,11 @@ namespace SOEN331Assignment1_2
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
             Console.WriteLine("9. Adding and removing an edge: " + myGraph.areAdjacent(lasalle, verdun));
-
+            Console.WriteLine("10. IncidentEdges: ");
+            Console.WriteLine("11. ");
+            Console.WriteLine("12. ");
+            Console.WriteLine("13. ");
+            Console.WriteLine("14. ");
             Console.Read();
         }
     }
