@@ -19,12 +19,12 @@ namespace SOEN331Assignment1_2
     /// <typeparam name="V">Vertex type</typeparam>
     class UndirectedGraph<E, V>
     {
-        private List<Edge<E,V>> edgeList;
+        private List<UndirectedEdge<E,V>> edgeList;
         private HashSet<V> vertexList;
 
         public UndirectedGraph()
         {
-            edgeList = new List<Edge<E, V>>();
+            edgeList = new List<UndirectedEdge<E, V>>();
             vertexList = new HashSet<V>();
         }
 
@@ -52,27 +52,27 @@ namespace SOEN331Assignment1_2
             return edges().Count;
         }
 
-        public Edge<E, V> getEdge(V v, V w)
+        public UndirectedEdge<E, V> getEdge(V v, V w)
         {
-            Edge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Except(new HashSet<V> { v, w }).Any());
+            UndirectedEdge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.SetEquals(new HashSet<V> { v, w }));
 
             if (edge == null)
             {
                 Console.WriteLine("Exception. No edge can be found connected by both vertices");
-                return default(Edge<E, V>);
+                return default(UndirectedEdge<E, V>);
             }
 
             return edge;
         }
 
-        public HashSet<Edge<E, V>> incidentEdges(V v)
+        public HashSet<UndirectedEdge<E, V>> incidentEdges(V v)
         {
-            return new HashSet<Edge<E, V>>(edgeList.Where(x => x.vertices.Contains(v)));
+            return new HashSet<UndirectedEdge<E, V>>(edgeList.Where(x => x.vertices.Contains(v)));
         }
 
-        public V opposite(V v,Edge<E, V> e)
+        public V opposite(V v,UndirectedEdge<E, V> e)
         {
-            Edge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Contains(v) && x.Equals(e));
+            UndirectedEdge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Contains(v) && x.Equals(e));
             if (edgeList == null)
             {
                 Console.WriteLine("Exception. Specified edge is not connnected to specified vertex");
@@ -82,14 +82,14 @@ namespace SOEN331Assignment1_2
             return edge.vertices.FirstOrDefault(x => !x.Equals(v));
         }
 
-        public HashSet<V> endVerticies(Edge<E, V> e)
+        public HashSet<V> endVerticies(UndirectedEdge<E, V> e)
         {
             return new HashSet<V>(edgeList.FirstOrDefault(x => x.Equals(e)).vertices);
         }
 
         public bool areAdjacent(V v, V w)
         {
-            return edgeList.Any(x => x.vertices.Except(new List<V>() { v, w }).Any());
+            return edgeList.Any(x => x.vertices.SetEquals(new List<V>() { v, w }));
         }
 
         public UndirectedGraph<E,V> insertVertex(V v)
@@ -108,7 +108,7 @@ namespace SOEN331Assignment1_2
 
         public UndirectedGraph<E, V> insertEdge(V v, V w, E x)
         {
-            Edge<E, V> newNode = new Edge<E, V>(v, w, x, false);
+            UndirectedEdge<E, V> newNode = new UndirectedEdge<E, V>(v, w, x);
             if (!edgeList.Any(a => a.Equals(newNode)))
             {
                 edgeList.Add(newNode);
@@ -125,12 +125,12 @@ namespace SOEN331Assignment1_2
             return this;
         }
 
-        public E getEdgeElem(Edge<E, V> e)
+        public E getEdgeElem(UndirectedEdge<E, V> e)
         {
             return e.element;
         }
 
-        public UndirectedGraph<E, V> replaceEdgeElem(Edge<E, V> e, E x) 
+        public UndirectedGraph<E, V> replaceEdgeElem(UndirectedEdge<E, V> e, E x) 
         {
             if (!edgeList.Any(y => y.element.Equals(x)))
             {

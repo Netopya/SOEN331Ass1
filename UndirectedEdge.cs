@@ -10,18 +10,17 @@ namespace SOEN331Assignment1_2
     {
         public HashSet<V> vertices { get; private set; }
         public E element { get; set; }
-        public readonly bool directed;
+
         /// <summary>
         /// Constructor to create an edge
         /// </summary>
         /// <param name="v">First vertex</param>
         /// <param name="w">Second vertex</param>
         /// <param name="x">Edge</param>
-        public UndirectedEdge(V v, V w, E x, bool directed)
+        public UndirectedEdge(V v, V w, E x)
         {
             vertices = new HashSet<V> { v, w };
             element = x;
-            this.directed = directed;
         }
 
         public override bool Equals(object obj)

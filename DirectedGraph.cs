@@ -20,7 +20,7 @@ namespace SOEN331Assignment1_2
             set = new List<DirectedEdge<E,V>>();
         }
 
-        public DirectedGraph<E, V> newdirectedgraph()
+        public static DirectedGraph<E, V> newdirectedgraph()
         {
             return new DirectedGraph<E, V>();
         }
