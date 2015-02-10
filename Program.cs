@@ -77,7 +77,7 @@ namespace SOEN331Assignment1_2
             Console.WriteLine("1. New graph has no vertices: " + !myGraph.vertices().Any());
             Console.WriteLine("2. New graph has no edges: " + !myGraph.edges().Any());
             Console.WriteLine("3. Zero vertices in new graph: " + myGraph.countAllVertices());
-            Console.WriteLine("4. New graph has no edges: " + myGraph.countAllEdges());
+            Console.WriteLine("4. Zero edges in new graph: " + myGraph.countAllEdges());
             myGraph.insertVertex(lasalle);
             myGraph.insertVertex(lachine);
             Console.WriteLine("5. Adding two different vertices: " + myGraph.countAllVertices());
@@ -99,14 +99,25 @@ namespace SOEN331Assignment1_2
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
             myGraph.insertEdge(lasalle, emard, 200);
-            Console.WriteLine("10. IncidentEdges on lasalle: {" + string.Join(", ", myGraph.incidentEdges(lasalle).Select(x => x)) + "}");    //NO
+            Console.WriteLine("10. IncidentEdges on Lasalle: {" + string.Join(", ", myGraph.incidentEdges(lasalle).Select(x => x)) + "}");    //NO
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
             myGraph.insertEdge(lasalle, emard, 200);
-            Console.WriteLine("11. Opposite vertex of verdun: " + myGraph.opposite(verdun,myGraph.getEdge(lasalle,verdun)));    //SHOULD NOT BE THE ELEMENT 100, BUT THE ACTUAL EDGE
+            Console.WriteLine("11. Opposite vertex of Verdun: " + myGraph.opposite(verdun,myGraph.getEdge(lasalle,verdun)));    //SHOULD NOT BE THE ELEMENT 100, BUT THE ACTUAL EDGE
             Console.WriteLine("12. EndVertices: {" + string.Join(", ", myGraph.endVerticies(myGraph.getEdge(lasalle,verdun)).Select(x => x)) + "}");
-            Console.WriteLine("13. ");
-            Console.WriteLine("14. ");
+            Console.WriteLine("13. GetEdgeElem: " + myGraph.getEdgeElem(myGraph.getEdge(lasalle, verdun)));
+            myGraph.replaceEdgeElem(myGraph.getEdge(lasalle, verdun), 300);
+            Console.WriteLine("14. ReplaceEdgeElem from 100 to 300: " + myGraph.getEdgeElem(myGraph.getEdge(lasalle, verdun)));
+
+            //DirectedGraph Axioms
+            DirectedGraph<int,city> myGraph2 = DirectedGraph<int,city>.newdirectedgraph();
+            Console.WriteLine("\nDirectedGraph Axioms --->");
+            Console.WriteLine("1. New directed graph has no vertices: " + !myGraph2.vertices().Any());
+            Console.WriteLine("2. New directed graph has no edges: " + !myGraph2.edges().Any());
+            Console.WriteLine("3. Zero vertices in new graph: " + myGraph2.countAllVertices());
+            Console.WriteLine("4. Zero edges in new graph: " + myGraph2.countAllEdges());
+            myGraph2.insertDirectedEdge()
+
             Console.Read();
         }
     }
