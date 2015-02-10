@@ -51,17 +51,17 @@ namespace SOEN331Assignment1_2
             Console.WriteLine("Distance between Lasalle and Lachine: " + myGraph.getEdge(lasalle, lachine));
             Console.WriteLine("Distance between Emard and Lachine: " + myGraph.getEdge(emard, lachine));
 
-            Console.WriteLine("Distances incident on Lasalle: " + string.Join(" ",myGraph.incidentEdges(lasalle).ToArray()));
+            Console.WriteLine("Distances incident on Lasalle: " + string.Join(" ",myGraph.incidentEdges(lasalle)));
 
-            Console.WriteLine("Opposite to lasalle at 100: " + myGraph.opposite(lasalle, 100));
-            Console.WriteLine("Opposite to lasalle at 700: " + myGraph.opposite(lasalle, 700));
+            Console.WriteLine("Opposite to lasalle at 100: " + myGraph.opposite(lasalle, myGraph.getEdge(lasalle, verdun)));
+            Console.WriteLine("Opposite to lasalle at 700: " + myGraph.opposite(lasalle, myGraph.getEdge(lasalle, lachine)));
 
-            Console.WriteLine("End vertices on 300: " + string.Join(" ",myGraph.endVerticies(300)));
+            Console.WriteLine("End vertices on 300: " + string.Join(" ", myGraph.endVerticies(myGraph.getEdge(lachine, lasalle))));
 
             Console.WriteLine("Are adjacent? lachine verdun? " + myGraph.areAdjacent(lachine, verdun));
             Console.WriteLine("Are adjacent? lachine verdun? " + myGraph.areAdjacent(emard, lachine));
 
-            myGraph.removeEdge(100);
+            myGraph.removeEdge(lasalle, verdun);
 
             Console.WriteLine(string.Join(" ", myGraph.vertices().Select(x => x.name).ToArray()));
             Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
@@ -88,17 +88,23 @@ namespace SOEN331Assignment1_2
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertVertex(lasalle);
             myGraph.removeVertex(lasalle);
-            Console.WriteLine("7. Adding and removing a vertex: " + myGraph.countAllVertices());
+            Console.WriteLine("7. Adding and removing a vertex: " + myGraph.countAllVertices());    //NO
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
-            myGraph.removeEdge(myGraph.getEdge(lasalle, verdun));
-            Console.WriteLine("8. Adding and removing an edge: " + myGraph.countAllEdges());    //NO
+            myGraph.removeEdge(lasalle, verdun);
+            Console.WriteLine("8. Adding and removing an edge: " + myGraph.countAllEdges());
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
             Console.WriteLine("9. Adding and removing an edge: " + myGraph.areAdjacent(lasalle, verdun));
-            Console.WriteLine("10. IncidentEdges: ");
-            Console.WriteLine("11. ");
-            Console.WriteLine("12. ");
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertEdge(lasalle, verdun, 100);
+            myGraph.insertEdge(lasalle, emard, 200);
+            Console.WriteLine("10. IncidentEdges on lasalle: {" + string.Join(", ", myGraph.incidentEdges(lasalle).Select(x => x)) + "}");    //NO
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertEdge(lasalle, verdun, 100);
+            myGraph.insertEdge(lasalle, emard, 200);
+            Console.WriteLine("11. Opposite vertex of verdun: " + myGraph.opposite(verdun,myGraph.getEdge(lasalle,verdun)));    //SHOULD NOT BE THE ELEMENT 100, BUT THE ACTUAL EDGE
+            Console.WriteLine("12. EndVertices: {" + string.Join(", ", myGraph.endVerticies(myGraph.getEdge(lasalle,verdun)).Select(x => x)) + "}");
             Console.WriteLine("13. ");
             Console.WriteLine("14. ");
             Console.Read();
