@@ -70,6 +70,33 @@ namespace SOEN331Assignment1_2
             {
 
             }
+
+            //UndirectedGraph Axioms
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            Console.WriteLine("\nUndirectedGraph Axioms --->");
+            Console.WriteLine("1. New graph has no vertices: " + !myGraph.vertices().Any());
+            Console.WriteLine("2. New graph has no edges: " + !myGraph.edges().Any());
+            Console.WriteLine("3. Zero vertices in new graph: " + myGraph.countAllVertices());
+            Console.WriteLine("4. New graph has no edges: " + myGraph.countAllEdges());
+            myGraph.insertVertex(lasalle);
+            myGraph.insertVertex(lachine);
+            Console.WriteLine("5. Adding two different vertices: " + myGraph.countAllVertices());    //NO
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertVertex(lasalle);
+            myGraph.insertVertex(lasalle);
+            Console.WriteLine("6. Adding two same vertices: " + myGraph.countAllVertices());
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertVertex(lasalle);
+            myGraph.removeVertex(lasalle);
+            Console.WriteLine("7. Adding and removing a vertex: " + myGraph.countAllVertices());
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertEdge(lasalle, verdun, 100);
+            myGraph.removeEdge(myGraph.getEdge(lasalle, verdun));
+            Console.WriteLine("8. Adding and removing an edge: " + myGraph.countAllEdges());    //NO
+            myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
+            myGraph.insertEdge(lasalle, verdun, 100);
+            Console.WriteLine("9. Adding and removing an edge: " + myGraph.areAdjacent(lasalle, verdun));
+
             Console.Read();
         }
     }
