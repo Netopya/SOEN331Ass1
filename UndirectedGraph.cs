@@ -73,7 +73,7 @@ namespace SOEN331Assignment1_2
         public V opposite(V v,Edge<E, V> e)
         {
             Edge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Contains(v) && x.Equals(e));
-            if (edgeList == null)
+            if (edge == null)
             {
                 Console.WriteLine("Exception. Specified edge is not connnected to specified vertex");
                 return default(V);
