@@ -15,7 +15,7 @@ namespace SOEN331Assignment1_2
     /// SOEN 331 Assignment 1
     /// due 2015-02-13 
     /// </summary>
-    /// <typeparam name="E">Edge type</typeparam>
+    /// <typeparam name="E">Element type</typeparam>
     /// <typeparam name="V">Vertex type</typeparam>
     class UndirectedGraph<E, V>
     {
@@ -37,9 +37,9 @@ namespace SOEN331Assignment1_2
             return new HashSet<V>(vertexList);
         }
 
-        public HashSet<E> edges()
+        public HashSet<Edge<E,V>> edges()
         {
-            return new HashSet<E>(edgeList.Select(x => x.element));
+            return new HashSet<Edge<E, V>>(edgeList);
         }
 
         public int countAllVertices()
@@ -108,15 +108,20 @@ namespace SOEN331Assignment1_2
 
         public UndirectedGraph<E, V> insertEdge(V v, V w, E x)
         {
-            Edge<E, V> newNode = new Edge<E, V>(v, w, x, false);
+            insertSpecifiedEdge(v, w, x, false);
+
+            return this;
+        }
+
+        protected void insertSpecifiedEdge(V v, V w, E x, bool directed)
+        {
+            Edge<E, V> newNode = new Edge<E, V>(v, w, x, directed);
             if (!edgeList.Any(a => a.Equals(newNode)))
             {
                 edgeList.Add(newNode);
                 vertexList.Add(v);
                 vertexList.Add(w);
             }
-
-            return this;
         }
 
         public UndirectedGraph<E, V> removeEdge(V v, V w)
@@ -144,5 +149,6 @@ namespace SOEN331Assignment1_2
             return this;
         }
 
+        
     }
 }

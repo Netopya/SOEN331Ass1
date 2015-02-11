@@ -25,13 +25,33 @@ namespace SOEN331Assignment1_2
             var testObj = obj as UndirectedEdge<E, V>;
             if (testObj != null)
             {
-                //equal if verticies are the same or edge values are duplicated
-                return vertices.Except(testObj.vertices).Any() || element.Equals(testObj.element);
+                return element.Equals(testObj.element);
+                /*
+                if (element.Equals(testObj.element))
+                {
+                    return true;
+                }*/
+                /*
+                if (!directed)
+                {
+                    return !testObj.directed && vertices.Except(testObj.vertices).Any();
+                }
+                else
+                {
+                    return testObj.directed && vertices.SequenceEqual(testObj.vertices);
+                }*/
+                
+                
             }
             else
             {
                 return base.Equals(obj);
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return element.GetHashCode();
         }
 
         public override String ToString()
