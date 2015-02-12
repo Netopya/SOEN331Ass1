@@ -19,13 +19,13 @@ namespace SOEN331Assignment1_2
     /// <typeparam name="V">Vertex type</typeparam>
     class UndirectedGraph<E, V>
     {
-        private List<Edge<E,V>> edgeList;
+        private HashSet<Edge<E,V>> edgeList;
         private HashSet<V> vertexList;
 
         public UndirectedGraph()
         {
             //contructor initializes lists
-            edgeList = new List<Edge<E, V>>();
+            edgeList = new HashSet<Edge<E, V>>();
             vertexList = new HashSet<V>();
         }
 
@@ -83,7 +83,7 @@ namespace SOEN331Assignment1_2
         public Edge<E, V> getEdge(V v, V w)
         {
             HashSet<V> lookupVerticies = new HashSet<V> { v, w };
-            Edge<E, V> edge = edgeList.FirstOrDefault(x => x.vertices.Except(lookupVerticies).Any());
+            Edge<E, V> edge = edgeList.FirstOrDefault(x => !x.vertices.Except(lookupVerticies).Any());
 
             if (edge == null)
             {
@@ -165,7 +165,7 @@ namespace SOEN331Assignment1_2
         public UndirectedGraph<E, V> removeVertex(V v)
         {
             //Remove all edges connected to vertex
-            edgeList.RemoveAll(x => x.vertices.Contains(v));
+            edgeList.RemoveWhere(x => x.vertices.Contains(v));
             vertexList.Remove(v);
 
             return this;
@@ -216,14 +216,9 @@ namespace SOEN331Assignment1_2
         /// <returns>Updated graph</returns>
         public UndirectedGraph<E, V> replaceEdgeElem(Edge<E, V> e, E x) 
         {
-            if (!edgeList.Any(y => y.element.Equals(x)))
-            {
-                e.element = x;
-            }
-            else
-            {
-                edgeList.Remove(e);
-            }
+            edgeList.Remove(e);
+            e.element = x;
+            edgeList.Add(e);
             
             return this;
         }
