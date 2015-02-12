@@ -9,8 +9,8 @@ namespace SOEN331Assignment1_2
     /// <summary>
     /// Undirected Graph ADT
     /// By:
+    ///     David Bastien 26948553
     ///     Michael Bilinsky 26992358
-    ///     David Bastien
     /// 
     /// SOEN 331 Assignment 1
     /// due 2015-02-13 
