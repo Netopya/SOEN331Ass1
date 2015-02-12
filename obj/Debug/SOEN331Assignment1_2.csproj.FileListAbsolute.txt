@@ -4,3 +4,9 @@ C:\Users\Michael\Dropbox\Concordia Winter 2015\SOEN 331\assignment1\SOEN331Assig
 C:\Users\Michael\Dropbox\Concordia Winter 2015\SOEN 331\assignment1\SOEN331Assignment1_2\SOEN331Assignment1_2\obj\Debug\SOEN331Assignment1_2.csprojResolveAssemblyReference.cache
 C:\Users\Michael\Dropbox\Concordia Winter 2015\SOEN 331\assignment1\SOEN331Assignment1_2\SOEN331Assignment1_2\obj\Debug\SOEN331Assignment1_2.exe
 C:\Users\Michael\Dropbox\Concordia Winter 2015\SOEN 331\assignment1\SOEN331Assignment1_2\SOEN331Assignment1_2\obj\Debug\SOEN331Assignment1_2.pdb
+C:\Users\David\Documents\GitHub\SOEN331Ass1\bin\Debug\SOEN331Assignment1_2.exe.config
+C:\Users\David\Documents\GitHub\SOEN331Ass1\obj\Debug\SOEN331Assignment1_2.exe
+C:\Users\David\Documents\GitHub\SOEN331Ass1\obj\Debug\SOEN331Assignment1_2.pdb
+C:\Users\David\Documents\GitHub\SOEN331Ass1\bin\Debug\SOEN331Assignment1_2.exe
+C:\Users\David\Documents\GitHub\SOEN331Ass1\bin\Debug\SOEN331Assignment1_2.pdb
+C:\Users\David\Documents\GitHub\SOEN331Ass1\obj\Debug\SOEN331Assignment1_2.csprojResolveAssemblyReference.cache

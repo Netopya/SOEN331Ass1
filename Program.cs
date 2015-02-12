@@ -44,7 +44,7 @@ namespace SOEN331Assignment1_2
             
 
             Console.WriteLine(string.Join(" ", myGraph.vertices().Select(x => x.name).ToArray()));
-            Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
+            //Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
             Console.WriteLine("Vertices: " + myGraph.countAllVertices());
             Console.WriteLine("Edges: " + myGraph.countAllEdges());
 
@@ -64,7 +64,7 @@ namespace SOEN331Assignment1_2
             myGraph.removeEdge(lasalle, verdun);
 
             Console.WriteLine(string.Join(" ", myGraph.vertices().Select(x => x.name).ToArray()));
-            Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
+            //Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
 
             if (myGraph.vertices().Any())
             {
@@ -95,7 +95,7 @@ namespace SOEN331Assignment1_2
             Console.WriteLine("8. Adding and removing an edge: " + myGraph.countAllEdges());
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
-            Console.WriteLine("9. Adding and removing an edge: " + myGraph.areAdjacent(lasalle, verdun));
+            Console.WriteLine("9. Adjacent when directly connected: " + myGraph.areAdjacent(lasalle, verdun));
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
             myGraph.insertEdge(lasalle, verdun, 100);
             myGraph.insertEdge(lasalle, emard, 200);
@@ -116,7 +116,17 @@ namespace SOEN331Assignment1_2
             Console.WriteLine("2. New directed graph has no edges: " + !myGraph2.edges().Any());
             Console.WriteLine("3. Zero vertices in new graph: " + myGraph2.countAllVertices());
             Console.WriteLine("4. Zero edges in new graph: " + myGraph2.countAllEdges());
-            myGraph2.insertDirectedEdge()
+            city beloeil = new city { name = "beloeil" };
+            city hilaire = new city { name = "hilaire" };
+            myGraph2.insertDirectedEdge(beloeil, hilaire, 23);
+            Console.WriteLine("5. Incoming edges: " + string.Join(", ", myGraph2.incomingEdgesOf(hilaire).Select(x => x)));
+            Console.WriteLine("6. Indegree is 1: " + myGraph2.inDegreeOf(hilaire));
+            Console.WriteLine("7. Outdegree is 1: " + myGraph2.outDegreeOf(beloeil));
+            Console.WriteLine("8. Outgoing edges: " + string.Join(", ", myGraph2.outgoingEdgesOf(beloeil).Select(x => x)));
+            city hyacinthe = new city { name = "hyacinthe" };
+            myGraph2.insertDirectedEdge(hyacinthe, hilaire, 23);
+            Console.WriteLine("9.Indegree is 2: " + myGraph2.inDegreeOf(hilaire));
+            Console.WriteLine("9.Outdegree is 2: " + myGraph2.outDegreeOf(beloeil));
 
             Console.Read();
         }
