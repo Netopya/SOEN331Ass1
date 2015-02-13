@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace SOEN331Assignment1_2
 {
+    /// <summary>
+    /// Undirected Graph ADT
+    /// By:
+    ///     David Bastien 26948553
+    ///     Michael Bilinsky 26992358
+    /// 
+    /// SOEN 331 Assignment 1
+    /// due 2015-02-13
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Class to test the graphs, represents a city with a name
+        /// </summary>
         private class city
         {
             public string name;
@@ -20,56 +32,13 @@ namespace SOEN331Assignment1_2
 
         static void Main(string[] args)
         {
-            UndirectedGraph<int, city> myGraph = UndirectedGraph<int, city>.newgraph();
+            UndirectedGraph<int, city> myGraph;
 
             city lasalle = new city { name = "Lasalle" };
             city lachine = new city { name = "Lachine" };
             city verdun = new city { name = "Verdun" };
             city emard = new city { name = "Emard" };
             city bruno = new city { name = "Saint Bruno" };
-
-            myGraph.insertVertex(bruno);
-            myGraph.insertVertex(lasalle);
-
-            Console.WriteLine("Verticies count: " + myGraph.countAllVertices());
-
-            myGraph.insertEdge(lasalle, verdun, 100);
-            myGraph.insertEdge(lachine, lasalle, 300);
-            myGraph.insertEdge(lasalle, emard, 500);
-            myGraph.insertEdge(emard, verdun, 100);
-            myGraph.insertEdge(lachine, verdun, 600);
-            myGraph.insertEdge(emard, lasalle, 500); //dup
-            
-            
-            
-
-            Console.WriteLine(string.Join(" ", myGraph.vertices().Select(x => x.name).ToArray()));
-            //Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
-            Console.WriteLine("Vertices: " + myGraph.countAllVertices());
-            Console.WriteLine("Edges: " + myGraph.countAllEdges());
-
-            Console.WriteLine("Distance between Lasalle and Lachine: " + myGraph.getEdge(lasalle, lachine));
-            Console.WriteLine("Distance between Emard and Lachine: " + myGraph.getEdge(emard, lachine));
-
-            Console.WriteLine("Distances incident on Lasalle: " + string.Join(" ",myGraph.incidentEdges(lasalle)));
-
-            Console.WriteLine("Opposite to lasalle at 100: " + myGraph.opposite(lasalle, myGraph.getEdge(lasalle, verdun)));
-            Console.WriteLine("Opposite to lasalle at 700: " + myGraph.opposite(lasalle, myGraph.getEdge(lasalle, lachine)));
-
-            Console.WriteLine("End vertices on 300: " + string.Join(" ", myGraph.endVerticies(myGraph.getEdge(lachine, lasalle))));
-
-            Console.WriteLine("Are adjacent? lachine verdun? " + myGraph.areAdjacent(lachine, verdun));
-            Console.WriteLine("Are adjacent? lachine verdun? " + myGraph.areAdjacent(emard, lachine));
-
-            myGraph.removeEdge(lasalle, verdun);
-
-            Console.WriteLine(string.Join(" ", myGraph.vertices().Select(x => x.name).ToArray()));
-            //Console.WriteLine(string.Join(" ", myGraph.edges().ToArray()));
-
-            if (myGraph.vertices().Any())
-            {
-
-            }
 
             //UndirectedGraph Axioms
             myGraph = UndirectedGraph<int, city>.newgraph(); //reset graph
