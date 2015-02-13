@@ -20,7 +20,7 @@ namespace SOEN331Assignment1_2
     /// <typeparam name="V">Vertex type</typeparam>
     class Edge<E,V>
     {
-        public V[] vertices { get; private set; }
+        public readonly V[] vertices;
         public E element { get; set; }
         public readonly bool directed;
 
@@ -45,7 +45,7 @@ namespace SOEN331Assignment1_2
         /// <returns>Whether the object is equal to this</returns>
         public override bool Equals(object obj)
         {
-            var testObj = obj as UndirectedEdge<E, V>;
+            var testObj = obj as Edge<E, V>;
             if (testObj != null)
             {
                 return element.Equals(testObj.element);

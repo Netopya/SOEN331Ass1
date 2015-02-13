@@ -143,7 +143,7 @@ namespace SOEN331Assignment1_2
         {
             //check if the the difference of two sets of vertices contains any elements
             HashSet<V> verticiesQuery = new HashSet<V> { v, w };
-            return edgeList.Any(x => x.vertices.Except(verticiesQuery).Any());
+            return edgeList.Any(x => !x.vertices.Except(verticiesQuery).Any());
         }
 
         /// <summary>
@@ -216,6 +216,7 @@ namespace SOEN331Assignment1_2
         /// <returns>Updated graph</returns>
         public UndirectedGraph<E, V> replaceEdgeElem(Edge<E, V> e, E x) 
         {
+            //must add and remove the edge to rehash it
             edgeList.Remove(e);
             e.element = x;
             edgeList.Add(e);

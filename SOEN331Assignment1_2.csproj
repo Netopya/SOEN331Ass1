@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectedEdge.cs" />
     <Compile Include="DirectedGraph.cs" />
     <Compile Include="Edge.cs" />
-    <Compile Include="UndirectedEdge.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UndirectedGraph.cs" />
