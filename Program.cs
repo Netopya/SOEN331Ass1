@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace SOEN331Assignment1_2
 {
     /// <summary>
-    /// Undirected Graph ADT
+    /// Main class for assignment 1
+    /// Tests the axioms for undirected and directed graphs
     /// By:
     ///     David Bastien 26948553
     ///     Michael Bilinsky 26992358
